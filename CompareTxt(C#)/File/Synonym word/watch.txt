@@ -1,0 +1,10 @@
+lookout
+lookout man
+picket
+scout
+sentinel
+sentry
+spotter
+ticker
+vigil
+watch

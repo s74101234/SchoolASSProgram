@@ -1,0 +1,4 @@
+earphone
+earpiece
+headphone
+phone
