@@ -4,28 +4,33 @@
  * and open the template in the editor.
  */
 package igstep1;
-
-import java.io.*;
 import java.util.*;
 
 /**
  *
  * @author Guo Yu-Cheng
+ * Description 
+ * {
+ *  The list randomly takes three values 
+ *  and then reinserts the list.
+ * }
  */
 public class IGStep1 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
-        
         //test
         ArrayList list = new ArrayList(Arrays.asList(1, 2, 3,4,5,6,7,8,9,10));
         ArrayList result = new ArrayList();
         
+//        //Starting value of list
+//        for(int i = 0 ; i < list.size();i++)
+//        {
+//            System.out.print(list.get(i) + "\t");
+//        }
+//        System.out.println();
+        
         IGStep1 igs = new IGStep1();
-        result = igs.Step1(list,3);
+        result = igs.Step1(list,1);
         
         //result
         for(int i = 0 ; i < result.size();i++)
@@ -37,14 +42,13 @@ public class IGStep1 {
     private static ArrayList Step1(ArrayList list,int x)
     {
         ArrayList savevalue = new ArrayList();
-        x = x-1;
         
         //set random
         int takeout ;
         int putin ;
         Random random = new Random();
         
-            for(int count = 0 ; count <= x ; count++ ){
+            for(int count = 0 ; count < x ; count++ ){
             //takeout random
             takeout = random.nextInt(list.size());
 
