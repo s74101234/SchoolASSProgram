@@ -1,0 +1,7 @@
+C:\Users\Guo Yu-Cheng\Documents\GitHub\CompareTxtXml\CompareTxtXml\bin\Debug\CompareTxtXml.exe.config
+C:\Users\Guo Yu-Cheng\Documents\GitHub\CompareTxtXml\CompareTxtXml\bin\Debug\CompareTxtXml.exe
+C:\Users\Guo Yu-Cheng\Documents\GitHub\CompareTxtXml\CompareTxtXml\bin\Debug\CompareTxtXml.pdb
+C:\Users\Guo Yu-Cheng\Documents\GitHub\CompareTxtXml\CompareTxtXml\obj\Debug\CompareTxtXml.csprojResolveAssemblyReference.cache
+C:\Users\Guo Yu-Cheng\Documents\GitHub\CompareTxtXml\CompareTxtXml\obj\Debug\CompareTxtXml.exe
+C:\Users\Guo Yu-Cheng\Documents\GitHub\CompareTxtXml\CompareTxtXml\obj\Debug\CompareTxtXml.pdb
+C:\Users\Guo Yu-Cheng\Documents\GitHub\CompareTxtXml\CompareTxtXml\obj\Debug\CompareTxtXml.csproj.ResolveComReference.cache

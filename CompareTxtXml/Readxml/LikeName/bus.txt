@@ -1,0 +1,14 @@
+autobus
+bus
+busbar
+bus topology
+charabanc
+coach
+double-decker
+heap
+jalopy
+jitney
+motorbus
+motorcoach
+omnibus
+passenger vehicle

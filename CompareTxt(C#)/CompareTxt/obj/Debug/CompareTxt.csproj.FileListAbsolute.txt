@@ -10,3 +10,6 @@ C:\Users\Guo Yu-Cheng\Documents\GitHub\ValidateGCVResults\CompareTxt\obj\Debug\C
 C:\Users\Guo Yu-Cheng\Documents\GitHub\ValidateGCVResults\CompareTxt\bin\Debug\CompareTxt.exe
 C:\Users\Guo Yu-Cheng\Documents\GitHub\ValidateGCVResults\CompareTxt\bin\Debug\CompareTxt.pdb
 C:\Users\Guo Yu-Cheng\Documents\GitHub\ValidateGCVResults\CompareTxt\obj\Debug\CompareTxt.csprojResolveAssemblyReference.cache
+C:\Users\Guo Yu-Cheng\Documents\GitHub\SchoolASS\CompareTxt(C#)\CompareTxt\bin\Debug\CompareTxt.exe.config
+C:\Users\Guo Yu-Cheng\Documents\GitHub\SchoolASS\CompareTxt(C#)\CompareTxt\obj\Debug\CompareTxt.exe
+C:\Users\Guo Yu-Cheng\Documents\GitHub\SchoolASS\CompareTxt(C#)\CompareTxt\obj\Debug\CompareTxt.pdb

@@ -1,0 +1,11 @@
+auto
+automobile
+cable car
+car
+elevator car
+gondola
+machine
+motorcar
+railcar
+railroad car
+railway car

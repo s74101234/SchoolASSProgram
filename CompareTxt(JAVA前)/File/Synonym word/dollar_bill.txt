@@ -1,0 +1,5 @@
+buck
+clam
+dollar
+dollar bill
+one dollar bill
