@@ -13,49 +13,118 @@ import java.util.*;
  */
 public class TimeSchedule {
 
+    private int completionTime;
+    private int[] Sequence;
+    private int[] processingTime;
+    private int[] releaseDate;
+    private int[] dueDate;
+    private int[] revenue;
+    
+
+//  private double [] r;       //  release date.
+//  private double [] p;       //  processing time
+//  private double [] d;       //  due-date
+//  private double [] d_bar;   //  deadline
+//  private double [] e;       //  revenue
+//  private double [] w;       //  weight
+//  private double [][] s;     //  setup times
+//  private int size;          //  instance lengh
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        //create list,pi,ri
-        ArrayList<Integer> list = new ArrayList(Arrays.asList(5,3,1,2,4));
-        ArrayList<Integer> pi = new ArrayList(Arrays.asList(2,4,8,6,10));
-        ArrayList<Integer> ri = new ArrayList(Arrays.asList(1,3,7,5,9));
-
-        int result = 0;
-        TimeSchedule ts = new TimeSchedule();
-
-        //result
-        result = ts.Sequence(list, pi, ri);
-        System.out.println(result);
-
+    
+    public void setSequence(int[] Sequence) {
+        this.Sequence = Sequence;
     }
 
-    private static int Sequence(ArrayList<Integer> list, ArrayList<Integer> pi, ArrayList<Integer> ri) {
-        int sum = 0;
+    public void setProcessingTime(int[] processingTime) {
+        this.processingTime = processingTime;
+    }
 
-        //print startlist
+    public void setReleaseDate(int[] releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+    
+    public void setDueDate(int[] dueDate) {
+        this.dueDate = dueDate;
+    }
+    
+    public void setRevenue(int[] revenue) {
+        this.revenue = revenue;
+    }
+
+    public static void main(String[] args) {
+        //create Sequence,processingTime,ri
+        TimeSchedule ts = new TimeSchedule();
+        ts.setSequence(new int[]{1,2,3,4,5});
+        ts.setReleaseDate(new int[]{1, 3, 7, 5, 9}); //Goods arrived Date.
+        ts.setProcessingTime(new int[]{2, 4, 8, 6, 10});
+        ts.setDueDate(new int[]{4,7,8,15,20});
+        ts.setRevenue(new int[]{15,10,6,6,7});
+
+        //result
+        System.out.println("Income : \t" + ts.Sorting());
+    }
+
+    private int Sorting() {
+        int[] tempCompletionTime = new int[Sequence.length];
+        int[] temprevenue = new int[Sequence.length];
+        int income = 0;
+        
+        //Processing the completion time
+
+        for (int i = 0; i < Sequence.length; i++) 
+        {
+            int index = Sequence[i] - 1;
+            if (completionTime > releaseDate[index]) 
+            {
+                completionTime += processingTime[index];
+            } 
+            else 
+            {
+                completionTime = processingTime[index] + releaseDate[index];
+            }
+
+            if(dueDate[i] >= completionTime)
+            {
+                temprevenue[i] += revenue[i];
+                income += revenue[i]; 
+            }
+            
+            tempCompletionTime[i] = completionTime;
+            
+        }
+        
+        //print Sequence
         System.out.print("Sequence : " + "\t");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.print(list.get(i) + "\t");
+        for (int i = 0; i < Sequence.length; i++) {
+            System.out.print(Sequence[i] + "\t");
+        }
+        System.out.println();
+        
+        //print completionTime
+        System.out.print("CompletionTime : ");
+        for (int i = 0; i < tempCompletionTime.length; i++) {
+            System.out.print(tempCompletionTime[i] + "\t");
+        }
+        System.out.println();
+        
+        //print dueDate
+        System.out.print("dueDate : " + "\t");
+        for (int i = 0; i < dueDate.length; i++) {
+            System.out.print(dueDate[i] + "\t");
+        }
+        System.out.println();
+        
+        //print Income
+        System.out.print("Revenue : " + "\t");
+        for (int i = 0; i < temprevenue.length; i++) {
+            System.out.print(temprevenue[i] + "\t");
         }
         System.out.println();
 
-        //Processing the completion time
-        System.out.print("Completion: " + "\t");
 
-        for (int i = 0; i < list.size(); i++) {
-            if (sum > ri.get(list.get(i) - 1)) {
-                sum += pi.get(list.get(i) - 1);
-            } else {
-                sum += pi.get(list.get(i) - 1) + (ri.get(list.get(i) - 1) - sum);
-            }
-            
-            System.out.print(sum + "\t");
-        }
-
-        return sum;
+        return income;
     }
 
 }
