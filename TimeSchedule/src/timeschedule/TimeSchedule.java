@@ -83,7 +83,9 @@ public class TimeSchedule {
         double totalRevenue = 0;
         double[] temprevenue = new double[Sequence.length];
 
-        for (int index = 0; index < Sequence.length; index++) {
+        for (int i = 0; i < Sequence.length; i++) {
+            int index = Sequence[i] - 1;
+            
             if (tempcompletionTime <= releaseDate[index]) {
                 tempcompletionTime = releaseDate[index] + processingTime[index];
                 completionTime[index] = tempcompletionTime;
@@ -96,14 +98,16 @@ public class TimeSchedule {
                 temprevenue[index] = revenue[index];
                 totalRevenue += temprevenue[index];
             } else if (completionTime[index] > dueDate[index] && completionTime[index] < deadline[index]) {
-                temprevenue[index] = (revenue[index] * completionTime[index] / (dueDate[index] + deadline[index]));
+                temprevenue[index] = (revenue[index] * (completionTime[index] - dueDate[index]) / (deadline[index] - dueDate[index]));
 
                 //The second decimal point
                 temprevenue[index] = Double.parseDouble(df.format(temprevenue[index]));
                 totalRevenue += temprevenue[index];
             } else {
                 temprevenue[index] = 0;
-                tempcompletionTime = completionTime[index - 1];
+                
+                //Return to the previous value
+                tempcompletionTime = completionTime[Sequence[i - 1] - 1];
             }
         }
 
@@ -117,42 +121,42 @@ public class TimeSchedule {
         //print ReleaseDate
         System.out.print("ReleaseDate : " + "\t");
         for (int i = 0; i < releaseDate.length; i++) {
-            System.out.print(releaseDate[i] + "\t");
+            System.out.print(releaseDate[Sequence[i] - 1] + "\t");
         }
         System.out.println();
 
         //print processingTime
         System.out.print("ProcessingTime : ");
         for (int i = 0; i < processingTime.length; i++) {
-            System.out.print(processingTime[i] + "\t");
+            System.out.print(processingTime[Sequence[i] - 1] + "\t");
         }
         System.out.println();
 
         //print completionTime
         System.out.print("CompletionTime : ");
         for (int i = 0; i < completionTime.length; i++) {
-            System.out.print(completionTime[i] + "\t");
+            System.out.print(completionTime[Sequence[i] - 1] + "\t");
         }
         System.out.println();
 
         //print dueDate
         System.out.print("DueDate : " + "\t");
         for (int i = 0; i < dueDate.length; i++) {
-            System.out.print(dueDate[i] + "\t");
+            System.out.print(dueDate[Sequence[i] - 1] + "\t");
         }
         System.out.println();
 
         //print deadline
         System.out.print("Deadline : " + "\t");
         for (int i = 0; i < deadline.length; i++) {
-            System.out.print(deadline[i] + "\t");
+            System.out.print(deadline[Sequence[i] - 1] + "\t");
         }
         System.out.println();
 
         //print Income
         System.out.print("Revenue : " + "\t");
         for (int i = 0; i < temprevenue.length; i++) {
-            System.out.print(temprevenue[i] + "\t");
+            System.out.print(temprevenue[Sequence[i] - 1] + "\t");
         }
         System.out.println();
 
