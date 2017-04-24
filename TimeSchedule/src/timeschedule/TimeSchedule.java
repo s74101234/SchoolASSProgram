@@ -5,7 +5,7 @@
  */
 package timeschedule;
 
-import java.util.*;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -13,12 +13,14 @@ import java.util.*;
  */
 public class TimeSchedule {
 
-    private int completionTime;
+    private int tempcompletionTime = 0;
+    private int[] completionTime;
     private int[] Sequence;
     private int[] processingTime;
     private int[] releaseDate;
     private int[] dueDate;
-    private int[] revenue;
+    private int[] deadline;
+    private double[] revenue;
 
 //  private double [] r;       //  release date.
 //  private double [] p;       //  processing time
@@ -31,6 +33,10 @@ public class TimeSchedule {
     /**
      * @param args the command line arguments
      */
+    public void setcompletionTime(int[] completionTime) {
+        this.completionTime = completionTime;
+    }
+
     public void setSequence(int[] Sequence) {
         this.Sequence = Sequence;
     }
@@ -43,48 +49,62 @@ public class TimeSchedule {
         this.releaseDate = releaseDate;
     }
 
-    public void setDueDate(int[] dueDate) {
-        this.dueDate = dueDate;
+    public void setDueDate(int[] setdueDate) {
+        this.dueDate = setdueDate;
     }
 
-    public void setRevenue(int[] revenue) {
+    public void setDeadline(int[] deadline) {
+        this.deadline = deadline;
+    }
+
+    public void setRevenue(double[] revenue) {
         this.revenue = revenue;
     }
 
     public static void main(String[] args) {
         //create Sequence,processingTime,ri
         TimeSchedule ts = new TimeSchedule();
-        ts.setSequence(new int[]{1, 2, 5, 4, 3});
+        ts.setcompletionTime(new int[5]);
+        ts.setSequence(new int[]{2, 1, 5, 3, 4});
         ts.setReleaseDate(new int[]{1, 3, 7, 5, 9}); //Goods arrived Date.
-        ts.setProcessingTime(new int[]{2, 4, 8, 6, 10});
-        ts.setDueDate(new int[]{4, 7, 8, 15, 20});
-        ts.setRevenue(new int[]{15, 10, 6, 6, 7});
+        ts.setProcessingTime(new int[]{2, 5, 8, 6, 10});
+        ts.setDueDate(new int[]{4, 7, 8, 14, 20});
+        ts.setDeadline(new int[]{6, 9, 10, 17, 22});
+        ts.setRevenue(new double[]{15, 10, 6, 6, 7});
 
         //result
-        System.out.println("Income : \t" + ts.Sorting());
+        System.out.println("TotalRevenue : \t" + ts.Sorting());
     }
 
-    private int Sorting() {
-        int[] tempCompletionTime = new int[Sequence.length];
-        int[] temprevenue = new int[Sequence.length];
-        int income = 0;
+    private double Sorting() {
+        //The second decimal point
+        DecimalFormat df = new DecimalFormat("##.00");
 
-        //Processing the completion time
-        for (int i = 0; i < Sequence.length; i++) {
-            int index = Sequence[i] - 1;
-            if (completionTime > releaseDate[index]) {
-                completionTime += processingTime[index];
+        double totalRevenue = 0;
+        double[] temprevenue = new double[Sequence.length];
+
+        for (int index = 0; index < Sequence.length; index++) {
+            if (tempcompletionTime <= releaseDate[index]) {
+                tempcompletionTime = releaseDate[index] + processingTime[index];
+                completionTime[index] = tempcompletionTime;
             } else {
-                completionTime = processingTime[index] + releaseDate[index];
+                tempcompletionTime += processingTime[index];
+                completionTime[index] = tempcompletionTime;
             }
+                        
+            if (completionTime[index] <= dueDate[index]) {
+                temprevenue[index] = revenue[index];
+                totalRevenue += temprevenue[index];
+            } else if (completionTime[index] > dueDate[index] && completionTime[index] < deadline[index]) {
+                temprevenue[index] = (revenue[index] * completionTime[index] / (dueDate[index] + deadline[index]));
 
-            if (dueDate[index] >= completionTime) {
-                temprevenue[i] += revenue[index];
-                income += revenue[index];
+                //The second decimal point
+                temprevenue[index] = Double.parseDouble(df.format(temprevenue[index]));
+                totalRevenue += temprevenue[index];
+            } else {
+                temprevenue[index] = 0;
+                tempcompletionTime = completionTime[index - 1];
             }
-
-            tempCompletionTime[i] = completionTime;
-
         }
 
         //print Sequence
@@ -94,17 +114,38 @@ public class TimeSchedule {
         }
         System.out.println();
 
+        //print ReleaseDate
+        System.out.print("ReleaseDate : " + "\t");
+        for (int i = 0; i < releaseDate.length; i++) {
+            System.out.print(releaseDate[i] + "\t");
+        }
+        System.out.println();
+
+        //print processingTime
+        System.out.print("ProcessingTime : ");
+        for (int i = 0; i < processingTime.length; i++) {
+            System.out.print(processingTime[i] + "\t");
+        }
+        System.out.println();
+
         //print completionTime
         System.out.print("CompletionTime : ");
-        for (int i = 0; i < tempCompletionTime.length; i++) {
-            System.out.print(tempCompletionTime[i] + "\t");
+        for (int i = 0; i < completionTime.length; i++) {
+            System.out.print(completionTime[i] + "\t");
         }
         System.out.println();
 
         //print dueDate
-        System.out.print("dueDate : " + "\t");
+        System.out.print("DueDate : " + "\t");
         for (int i = 0; i < dueDate.length; i++) {
             System.out.print(dueDate[i] + "\t");
+        }
+        System.out.println();
+
+        //print deadline
+        System.out.print("Deadline : " + "\t");
+        for (int i = 0; i < deadline.length; i++) {
+            System.out.print(deadline[i] + "\t");
         }
         System.out.println();
 
@@ -115,7 +156,7 @@ public class TimeSchedule {
         }
         System.out.println();
 
-        return income;
+        return totalRevenue;
     }
 
 }
