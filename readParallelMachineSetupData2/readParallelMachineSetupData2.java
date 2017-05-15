@@ -14,6 +14,7 @@ public class readParallelMachineSetupData2 {
   private String type ;
   private String fileName;
   private String message;
+  private String writeFileName = "";
   private int numberOfMachines;
   private int numberOfJobs;
   private int seed = 8;
@@ -35,8 +36,7 @@ public class readParallelMachineSetupData2 {
     }
   }
   
-  public void getDataFromFile()
-  {
+  public void getDataFromFile()  {
     try
     {
       //read file
@@ -75,15 +75,29 @@ public class readParallelMachineSetupData2 {
     return numberOfJobs;
   }
   
-  public void output(){
-    for(int i = 0 ; i < result.length ; i++)
-    {
-      System.out.println(result[i]);
+  public void setDataOfWrite(String WriteFileName){
+    this.writeFileName = WriteFileName;
+    
+    this.writeFileName = WriteFileName;
+    if( WriteFileName == null ){
+        System.out.println( "Specify the file name please.");
+        System.exit(1);
     }
   }
   
-  public void setReleaseDate(int[] processingTime)
-  {
+  public void writeDataFromProgram() throws IOException{
+    FileWriter sw;
+    sw = new FileWriter(writeFileName,false);
+    
+    for(int i = 0 ; i < result.length ; i++)
+    {
+      sw.write(result[i] + "\n");
+    }
+    
+    sw.close();
+  }
+  
+  public void setReleaseDate(int[] processingTime)  {
     int total = 0;
     Random r = new Random(seed);
     this.releaseDate = new int[processingTime.length];
@@ -99,8 +113,7 @@ public class readParallelMachineSetupData2 {
     }
   }
   
-  public void setDueDate(int[] processingTime)
-  {
+  public void setDueDate(int[] processingTime)  {
     int total = 0;
     Random r = new Random(seed);
     this.dueDate = new int[processingTime.length];
@@ -116,8 +129,7 @@ public class readParallelMachineSetupData2 {
     }
   }
   
-  public void setDeadline(int[] dueDate)
-  {
+  public void setDeadline(int[] dueDate)  {
     Random r = new Random(seed);
     this.deadline = new int[processingTime.length];
     
@@ -127,8 +139,7 @@ public class readParallelMachineSetupData2 {
     }
   }
   
-  public void setProfit()
-  {
+  public void setProfit()  {
     Random r = new Random(seed);
     this.profit = new int[processingTime.length];
     
@@ -138,14 +149,13 @@ public class readParallelMachineSetupData2 {
     }
   }
   
-  public void setResult()
-  {
+  public void setResult()  {
     Random r = new Random(seed);
     this.result = new String[processingTime.length];
     
     for(int i = 0 ; i < result.length ; i++)
     {
-      this.result[i] = (i + 1) + " : \t" + 
+      this.result[i] =  
               processingTime[i] + "\t" + 
               releaseDate[i] + "\t" + 
               dueDate[i] + "\t" +
@@ -154,8 +164,7 @@ public class readParallelMachineSetupData2 {
     }
   }
   
-  public void setDataOfValue()
-  {
+  public void setDataOfResult()  {
     readParallelMachineSetupData2 rPMSD2 = new readParallelMachineSetupData2();
     rPMSD2.setReleaseDate(processingTime);
     rPMSD2.setDueDate(processingTime);
@@ -169,8 +178,9 @@ public class readParallelMachineSetupData2 {
         readParallelMachineSetupData2 rPMSD2 = new readParallelMachineSetupData2();
         rPMSD2.setData("dat",".\\instances\\ParallelMachineSetup\\Balanced\\2Machines\\20on2Rp50Rs50_1.dat");
         rPMSD2.getDataFromFile();
-        rPMSD2.setDataOfValue();
-        rPMSD2.output();
+        rPMSD2.setDataOfResult();
+        rPMSD2.setDataOfWrite(".\\instances\\ParallelMachineSetup\\Balanced\\2Machines\\20on2Rp50Rs50_1.txt");
+        rPMSD2.writeDataFromProgram();
       }
     }
           
