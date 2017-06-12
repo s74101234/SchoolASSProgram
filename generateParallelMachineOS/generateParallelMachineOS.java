@@ -10,7 +10,7 @@ import java.util.*;
  *
  * @author Guo Yu-Cheng
  */
-public class generateParallelMachineData {
+public class generateParallelMachineOS {
   private String type ;
   private String fileName;
   private String message;
@@ -165,7 +165,7 @@ public class generateParallelMachineData {
   }
   
   public void setDataOfResult()  {
-    generateParallelMachineData rPMSD2 = new generateParallelMachineData();
+    generateParallelMachineOS rPMSD2 = new generateParallelMachineOS();
     rPMSD2.setReleaseDate(processingTime);
     rPMSD2.setDueDate(processingTime);
     rPMSD2.setDeadline(dueDate);
@@ -175,12 +175,12 @@ public class generateParallelMachineData {
   
   public static void main(String[] args) throws IOException{
       {
-        generateParallelMachineData rPMSD2 = new generateParallelMachineData();
-        rPMSD2.setData("dat",".\\instances\\ParallelMachineSetup\\Balanced\\2Machines\\20on2Rp50Rs50_1.dat");
-        rPMSD2.getDataFromFile();
-        rPMSD2.setDataOfResult();
-        rPMSD2.setDataOfWrite(".\\instances\\ParallelMachineSetup\\Balanced\\2Machines\\20on2Rp50Rs50_1.txt");
-        rPMSD2.writeDataFromProgram();
+        generateParallelMachineOS gPMOS = new generateParallelMachineOS();
+        gPMOS.setData("dat",".\\instances\\ParallelMachineSetup\\Balanced\\2Machines\\20on2Rp50Rs50_1.dat");
+        gPMOS.getDataFromFile();
+        gPMOS.setDataOfResult();
+        gPMOS.setDataOfWrite(".\\instances\\ParallelMachineSetup\\Balanced\\2Machines\\20on2Rp50Rs50_1.txt");
+        gPMOS.writeDataFromProgram();
       }
     }
           
