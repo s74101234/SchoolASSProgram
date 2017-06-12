@@ -10,7 +10,7 @@ import java.util.*;
  *
  * @author Guo Yu-Cheng
  */
-public class readParallelMachineSetupData2 {
+public class generateParallelMachineData {
   private String type ;
   private String fileName;
   private String message;
@@ -165,7 +165,7 @@ public class readParallelMachineSetupData2 {
   }
   
   public void setDataOfResult()  {
-    readParallelMachineSetupData2 rPMSD2 = new readParallelMachineSetupData2();
+    generateParallelMachineData rPMSD2 = new generateParallelMachineData();
     rPMSD2.setReleaseDate(processingTime);
     rPMSD2.setDueDate(processingTime);
     rPMSD2.setDeadline(dueDate);
@@ -175,7 +175,7 @@ public class readParallelMachineSetupData2 {
   
   public static void main(String[] args) throws IOException{
       {
-        readParallelMachineSetupData2 rPMSD2 = new readParallelMachineSetupData2();
+        generateParallelMachineData rPMSD2 = new generateParallelMachineData();
         rPMSD2.setData("dat",".\\instances\\ParallelMachineSetup\\Balanced\\2Machines\\20on2Rp50Rs50_1.dat");
         rPMSD2.getDataFromFile();
         rPMSD2.setDataOfResult();
