@@ -4,3 +4,9 @@ C:\Users\Kuo Yu-Cheng\Documents\GitHub\School_Program_temp\Temperature\Temperatu
 C:\Users\Kuo Yu-Cheng\Documents\GitHub\School_Program_temp\Temperature\Temperature\obj\Debug\Temperature.csprojResolveAssemblyReference.cache
 C:\Users\Kuo Yu-Cheng\Documents\GitHub\School_Program_temp\Temperature\Temperature\obj\Debug\Temperature.exe
 C:\Users\Kuo Yu-Cheng\Documents\GitHub\School_Program_temp\Temperature\Temperature\obj\Debug\Temperature.pdb
+C:\Users\Kuo Yu-Cheng\Documents\GitHub\ValidateGCVResults\Temperature\Temperature\bin\Debug\Temperature.exe.config
+C:\Users\Kuo Yu-Cheng\Documents\GitHub\ValidateGCVResults\Temperature\Temperature\bin\Debug\Temperature.exe
+C:\Users\Kuo Yu-Cheng\Documents\GitHub\ValidateGCVResults\Temperature\Temperature\bin\Debug\Temperature.pdb
+C:\Users\Kuo Yu-Cheng\Documents\GitHub\ValidateGCVResults\Temperature\Temperature\obj\Debug\Temperature.csprojResolveAssemblyReference.cache
+C:\Users\Kuo Yu-Cheng\Documents\GitHub\ValidateGCVResults\Temperature\Temperature\obj\Debug\Temperature.exe
+C:\Users\Kuo Yu-Cheng\Documents\GitHub\ValidateGCVResults\Temperature\Temperature\obj\Debug\Temperature.pdb
