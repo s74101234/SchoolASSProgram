@@ -10,13 +10,15 @@ import java.util.*;
  *
  * @author Guo Yu-Cheng
  */
-public class generateParallelMachineOS {
+
+public class generateParallelMachineOAS {
   private String type ;
   private String fileName;
   private String message;
   private String writeFileName = "";
   private int numberOfMachines;
   private int numberOfJobs;
+  private int processingTimLengthOfMachine;
   private int seed = 8;
   private static int[] processingTime;
   private static int[] releaseDate;
@@ -29,7 +31,6 @@ public class generateParallelMachineOS {
     this.type = type;
     this.fileName = fileName;
 
-    this.fileName = fileName;
     if( fileName == null ){
         System.out.println( "Specify the file name please.");
         System.exit(1);
@@ -53,13 +54,14 @@ public class generateParallelMachineOS {
       
       int processingTimeCount = 3;
       numberOfMachines = Integer.parseInt(STxt[0]);
+      processingTimLengthOfMachine = numberOfMachines + 1;
       numberOfJobs = Integer.parseInt(STxt[1]);
       processingTime = new int[numberOfJobs];
       
       
       for(int i = 0 ; i < numberOfJobs ; i ++ ){//job
           processingTime[i] = Integer.parseInt(STxt[processingTimeCount]);
-          processingTimeCount +=3;
+          processingTimeCount += processingTimLengthOfMachine;
       }
       
       
@@ -165,7 +167,7 @@ public class generateParallelMachineOS {
   }
   
   public void setDataOfResult()  {
-    generateParallelMachineOS rPMSD2 = new generateParallelMachineOS();
+    generateParallelMachineOAS rPMSD2 = new generateParallelMachineOAS();
     rPMSD2.setReleaseDate(processingTime);
     rPMSD2.setDueDate(processingTime);
     rPMSD2.setDeadline(dueDate);
@@ -173,15 +175,30 @@ public class generateParallelMachineOS {
     rPMSD2.setResult();
   }
   
+  private void repeatedExecution(String readFilePath) throws IOException
+  {
+    File folder = new File(readFilePath);
+    String[] fileList = folder.list();
+    
+    for (int i = 0; i < fileList.length; i++) {
+      setData("dat",readFilePath + fileList[i]);
+      getDataFromFile(); 
+      setDataOfResult();
+      setDataOfWrite(".\\instances\\ParallelMachineSetup\\Balanced\\File\\12Machines\\" + fileList[i].substring(0,fileList[i].length()-4) + ".txt");
+      writeDataFromProgram();
+    }
+  }
+  
   public static void main(String[] args) throws IOException{
       {
-        generateParallelMachineOS gPMOS = new generateParallelMachineOS();
-        gPMOS.setData("dat",".\\instances\\ParallelMachineSetup\\Balanced\\2Machines\\20on2Rp50Rs50_1.dat");
-        gPMOS.getDataFromFile();
-        gPMOS.setDataOfResult();
-        gPMOS.setDataOfWrite(".\\instances\\ParallelMachineSetup\\Balanced\\2Machines\\20on2Rp50Rs50_1.txt");
-        gPMOS.writeDataFromProgram();
+        generateParallelMachineOAS rPMSD2 = new generateParallelMachineOAS();
+        rPMSD2.repeatedExecution(".\\instances\\ParallelMachineSetup\\Balanced\\12Machines\\");
+        
+//        rPMSD2.setData("dat",".\\instances\\ParallelMachineSetup\\Balanced\\2Machines\\20on2Rp50Rs50_1.dat");
+//        rPMSD2.getDataFromFile(); 
+//        rPMSD2.setDataOfResult();
+//        rPMSD2.setDataOfWrite(".\\instances\\ParallelMachineSetup\\Balanced\\2Machines\\20on2Rp50Rs50_1.txt");
+//        rPMSD2.writeDataFromProgram();  
       }
-    }
-          
+    }  
 }
