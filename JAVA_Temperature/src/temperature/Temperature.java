@@ -5,15 +5,15 @@
  */
 package temperature;
 
-import java.io.File;
 import java.io.FileWriter;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 /**
  *
@@ -24,126 +24,241 @@ public class Temperature {
     /**
      * @param args the command line arguments
      */
-    private String readXmlPath = "./File/C-B0024-003.xml";
-    private String writeCsvPath = "./File/C-B0024-003.csv";
-    private String locationNameTemp ;
-    private String stationIdTemp ;
-    private String[] obsTimeTemp = new String[2];
-    private void readxml()
-    {
-    try {
-        
-        FileWriter sw = new FileWriter(writeCsvPath, false);
+    private String readXmlPath = "./File/C-B0024-002.xml";
+    private String writeCsvPath = "./File/C-B0024-002.csv";
+    private String locationNameTemp,stationIdTemp;
+    private String obsTimeTemp;
+    private String elementNameTemp;
+    private String[] obsTimeValue = new String[2];
+    private int bvalue1Count = 0;
+    private boolean bTitle = true;
+    private boolean bfLine = false;
+    private boolean blocationName = false;
+    private boolean bstationId = false;
+    private boolean bobsTime = false;
+    private boolean belementName = false;
+    private boolean bvalue = false;
+    private boolean bvalue1 = false;
+    private boolean bvalue11 = false;
+    private boolean bvalue2 = false;
+    private boolean bvalue21 = false;
+    private boolean bvalue3 = false;
+    private boolean bvalue31 = false;
+    private boolean bvalue32 = false;
+    private boolean bvalue33 = true;
+    
+    
+   public static void main(String argv[]) throws IOException {
+       Temperature tp = new Temperature();
+       tp.SAXreadxml();
 
-            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse (new File(readXmlPath));
+   }
+   
+   private void SAXreadxml() throws IOException
+   {
+       FileWriter sw = new FileWriter(writeCsvPath, false);
+       try {
+	SAXParserFactory factory = SAXParserFactory.newInstance();
+	SAXParser saxParser = factory.newSAXParser();
 
-               NodeList locationList = doc.getElementsByTagName("location");   
-               for (int locationtemp = 0; locationtemp < locationList.getLength(); locationtemp++) 
-               {
-                   Node locationNode = locationList.item(locationtemp);
-                   if (locationNode.getNodeType() == Node.ELEMENT_NODE) 
-                   {
-                       Element locationeElement = (Element) locationNode;
-                       locationNameTemp = locationeElement.getElementsByTagName("locationName").item(0).getTextContent();
-                       stationIdTemp = locationeElement.getElementsByTagName("stationId").item(0).getTextContent();
-                       
-                            NodeList nList = doc.getElementsByTagName("time");
-                            for (int temp = 0; temp < nList.getLength(); temp++) {
+	DefaultHandler handler = new DefaultHandler() {
 
-                                    Node nNode = nList.item(temp);
+	
 
-                                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+	public void startElement(String uri, String localName,String qName,
+                Attributes attributes) throws SAXException {
 
-                                            Element eElement = (Element) nNode;
-                                            
-                                            obsTimeTemp = eElement.getElementsByTagName("obsTime").item(0).getTextContent().split(" ");
+		//System.out.println("Start Element :" + qName);
 
-                                            if (obsTimeTemp.length >= 2)
-                                            {
-                                                sw.write(locationNameTemp + "," + stationIdTemp + ","
-                                                    + obsTimeTemp[0] + "," + obsTimeTemp[1] + ",");
-                                            }
-                                            else
-                                            {
-                                                sw.write(locationNameTemp + "," + stationIdTemp + ","
-                                                    + obsTimeTemp[0] + "," + "" + ",");
-                                            }
-                                            
+		if (qName.equalsIgnoreCase("locationName")) {
+			blocationName = true;
+		}
 
-                                            if(eElement.getElementsByTagName("elementName").item(0).getTextContent().equals("測站氣壓") )
-                                            {
-                                                if (eElement.getElementsByTagName("elementName").item(0).getTextContent().equals("日照時數")) 
-                                                {
-                                                    sw.write( eElement.getElementsByTagName("value").item(0).getTextContent() + "," );
-                                                    sw.write( eElement.getElementsByTagName("value").item(1).getTextContent() + "," );
-                                                    sw.write( eElement.getElementsByTagName("value").item(2).getTextContent() + "," );
-                                                    sw.write( eElement.getElementsByTagName("value").item(3).getTextContent() + "," );
-                                                    sw.write( eElement.getElementsByTagName("value").item(4).getTextContent() + "," );
-                                                    sw.write( eElement.getElementsByTagName("value").item(5).getTextContent() + "," );
-                                                    sw.write( eElement.getElementsByTagName("value").item(6).getTextContent() + "," );
-                                                    sw.write("," + "," + "\n");
-                                                    
-//                                                    System.out.println("測站氣壓 : " + eElement.getElementsByTagName("value").item(0).getTextContent());
-//                                                    System.out.println("溫度 : " + eElement.getElementsByTagName("value").item(1).getTextContent());
-//                                                    System.out.println("相對濕度 : " + eElement.getElementsByTagName("value").item(2).getTextContent());
-//                                                    System.out.println("風速 : " + eElement.getElementsByTagName("value").item(3).getTextContent());
-//                                                    System.out.println("中文風向,英文風向 : " + eElement.getElementsByTagName("value").item(4).getTextContent());
-//                                                    System.out.println("降水量 : " + eElement.getElementsByTagName("value").item(5).getTextContent());
-//                                                    System.out.println("日照時數 : " + eElement.getElementsByTagName("value").item(6).getTextContent());
-                                                }else
-                                                {
-                                                    sw.write( eElement.getElementsByTagName("value").item(0).getTextContent() + "," );
-                                                    sw.write( eElement.getElementsByTagName("value").item(1).getTextContent() + "," );
-                                                    sw.write( eElement.getElementsByTagName("value").item(2).getTextContent() + "," );
-                                                    sw.write( eElement.getElementsByTagName("value").item(3).getTextContent() + "," );
-                                                    sw.write( eElement.getElementsByTagName("value").item(4).getTextContent() + "," );
-                                                    sw.write( eElement.getElementsByTagName("value").item(5).getTextContent() + "," );
-                                                    sw.write("," );
-                                                    sw.write("," + "," + "\n");
-                                                    
-//                                                System.out.println("測站氣壓 : " + eElement.getElementsByTagName("value").item(0).getTextContent());
-//                                                System.out.println("溫度 : " + eElement.getElementsByTagName("value").item(1).getTextContent());
-//                                                System.out.println("相對濕度 : " + eElement.getElementsByTagName("value").item(2).getTextContent());
-//                                                System.out.println("風速 : " + eElement.getElementsByTagName("value").item(3).getTextContent());
-//                                                System.out.println("中文風向,英文風向 : " + eElement.getElementsByTagName("value").item(4).getTextContent());
-//                                                System.out.println("降水量 : " + eElement.getElementsByTagName("value").item(5).getTextContent());
-//                                                System.out.println("日照時數 : " + "");
-                                                }
-                                                
-                                            }else if(eElement.getElementsByTagName("elementName").item(0).getTextContent().equals("當日最高溫度(°C)"))
-                                            {
-                                                sw.write("," + "," + "," + "," + "," + "," + ",");
-                                                sw.write( eElement.getElementsByTagName("value").item(0).getTextContent() + "," );
-                                                sw.write( eElement.getElementsByTagName("value").item(1).getTextContent() + "," );
-                                                sw.write( eElement.getElementsByTagName("value").item(2).getTextContent()  + "\n");
-                                                
-//                                                System.out.println("當日最高溫度(°C) : " + eElement.getElementsByTagName("value").item(0).getTextContent());
-//                                                System.out.println("當日最低溫度(°C) : " + eElement.getElementsByTagName("value").item(1).getTextContent());
-//                                                System.out.println("當日平均溫度(°C) : " + eElement.getElementsByTagName("value").item(2).getTextContent());
-                                            }
-                                    }
+		if (qName.equalsIgnoreCase("stationId")) {
+			bstationId = true;
+		}
+
+		if (qName.equalsIgnoreCase("obsTime")) {
+			bobsTime = true;
+		}
+                
+                if (qName.equalsIgnoreCase("elementName")) {
+			belementName = true;
+		}
+                
+                if(bvalue1)
+                {
+                    if (qName.equalsIgnoreCase("value")) {
+                        bvalue = true;
+			bvalue11 = true;
+                        bvalue21 = false;
+                        bvalue31 = false;
+                    }
+                }
+                if(bvalue2)
+                {
+                    if (qName.equalsIgnoreCase("value")) {
+                        bvalue = true;
+                        bvalue11 = false;
+			bvalue21 = true;
+                        bvalue31 = false;
+                    }
+                }
+                if(bvalue3)
+                {
+                    if (qName.equalsIgnoreCase("value")) {
+                        bvalue = true;
+                        bvalue11 = false;
+                        bvalue21 = false;
+			bvalue31 = true;
+                        if(bvalue33)
+                        {
+                            bvalue32 = true;
+                        }
+                    }
+                }
+                
+//                if (qName.equalsIgnoreCase("value")) {
+//			bvalue = true;                        
+//		}
+                            
+	}
+
+//	public void endElement(String uri, String localName,
+//		String qName) throws SAXException {
+//
+//		//System.out.println("End Element :" + qName);
+//
+//	}
+
+	public void characters(char ch[], int start, int length) throws SAXException {
+            try {
+                if(bTitle)
+                {
+                    sw.write("英文locationName,中文locationName,stationId,Date,Time," + 
+                            "測站氣壓,溫度,相對濕度,風速,中文風向,英文風向,降水量,日照時數," + 
+                            "當日最高溫度(°C),當日最低溫度(°C),當日平均溫度(°C)," + "\n");
+                    bTitle = false;
+                }
+                if (blocationName) {
+			locationNameTemp = (new String(ch, start, length));
+			blocationName = false;
+		}
+
+		if (bstationId) {
+			stationIdTemp = (new String(ch, start, length));
+			bstationId = false;
+		}
+
+		if (bobsTime) {
+                    
+                        obsTimeTemp = (new String(ch, start, length));
+                        
+                        //Split Date and Time
+                        obsTimeValue = obsTimeTemp.split(" ");
+                        
+                        if(bfLine){
+                            if(bvalue1Count == 6)
+                            {
+                                sw.write(",,,");
+                                bvalue1Count = 0;
                             }
-                   }
-               }
-               
-        }catch (SAXException e) {
-        Exception x = e.getException ();
-        ((x == null) ? e : x).printStackTrace ();
+                            else if(bvalue1Count == 7)
+                            {
+                                sw.write(",,"); 
+                                bvalue1Count = 0;
+                            }
+                        bvalue33 = true;
+                        sw.write("\n");
+                        }
+                        
+                        if (obsTimeValue.length >= 2)
+                        {
+                            sw.write(locationNameTemp + "," + stationIdTemp + "," +
+                                    obsTimeValue[0] + "," + obsTimeValue[1] + ",");
+                            blocationName = false;
+                        }
+                        else
+                        {
+                            sw.write(locationNameTemp + "," + stationIdTemp + "," +
+                                    obsTimeValue[0] + "," + "" + ",");
+                            blocationName = false;
+                        }
+                    
+			bobsTime = false;
+                        bfLine = true;
+                        
+                        
+		}
+                
+                if(belementName)
+                {
+                    elementNameTemp = (new String(ch, start, length)).trim();
+                    
+                    belementName = false;
+                    if(elementNameTemp.equals("測站氣壓"))
+                    {
+                        bvalue1 = true;
+                        bvalue2 = false;
+                        bvalue3 = false;
+                    }
+                    if(elementNameTemp.equals("日照時數"))
+                    {
+                        bvalue1 = false;
+                        bvalue2 = true;
+                        bvalue3 = false;
+                    }
+                    if(elementNameTemp.equals("當日最高溫度(°C)"))
+                    {
+                        bvalue1 = false;
+                        bvalue2 = false;
+                        bvalue3 = true;
+                    }
+                    
+                }
+                if(bvalue)
+                {
+                    bvalue = false;
+                    if (bvalue11) {
+                            sw.write((new String(ch, start, length)) + ",");
+                            bvalue1Count += 1 ;
+                                bvalue21 = false;
+                                bvalue31 = false;
+                    }
+                    if (bvalue21) {
+                            sw.write((new String(ch, start, length)) + ",");
+                            bvalue1Count += 1 ;
+                                bvalue11 = false;
+                                bvalue31 = false;
+                    }
+                    if (bvalue31) {
+                        if(bvalue32)
+                        {
+                            sw.write(",,,,,,,,");
+                            bvalue32 = false;
+                            bvalue33 = false;
+                        }
+                            sw.write((new String(ch, start, length)) + ",");
+                                bvalue11 = false;
+                                bvalue21 = false;
+                    }
+                }
+                
+            } catch (IOException ex) {
+                
+                Logger.getLogger(Temperature.class.getName()).log(Level.SEVERE, null, ex);
+                
+            }
+	}
 
-        }catch (Throwable t) {
-        t.printStackTrace ();
-        }
-        //System.exit (0);
+     };
+       saxParser.parse(readXmlPath, handler);
+     } catch (Exception e) {
+       e.printStackTrace();
+     }
+       
+       sw.close();
+   }
 
-    }
-    
-    
-    public static void main(String[] args) {
-        // TODO code application logic here
-        Temperature temperature = new Temperature();
-        temperature.readxml();
-    }
-    
+   
 }
