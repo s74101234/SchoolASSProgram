@@ -1,0 +1,6 @@
+C:\GoogleDriver\k40411161@gcloud.csu.edu.tw\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\C#_CalXmlLabel\CalXmlLabel\CalXmlLabel\bin\Debug\CalXmlLabel.exe.config
+C:\GoogleDriver\k40411161@gcloud.csu.edu.tw\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\C#_CalXmlLabel\CalXmlLabel\CalXmlLabel\bin\Debug\CalXmlLabel.exe
+C:\GoogleDriver\k40411161@gcloud.csu.edu.tw\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\C#_CalXmlLabel\CalXmlLabel\CalXmlLabel\bin\Debug\CalXmlLabel.pdb
+C:\GoogleDriver\k40411161@gcloud.csu.edu.tw\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\C#_CalXmlLabel\CalXmlLabel\CalXmlLabel\obj\Debug\CalXmlLabel.csprojResolveAssemblyReference.cache
+C:\GoogleDriver\k40411161@gcloud.csu.edu.tw\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\C#_CalXmlLabel\CalXmlLabel\CalXmlLabel\obj\Debug\CalXmlLabel.exe
+C:\GoogleDriver\k40411161@gcloud.csu.edu.tw\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\C#_CalXmlLabel\CalXmlLabel\CalXmlLabel\obj\Debug\CalXmlLabel.pdb
