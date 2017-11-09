@@ -13,3 +13,9 @@ C:\Users\Guo Yu-Cheng\Documents\GitHub\ValidateGCVResults\CompareTxt\obj\Debug\C
 C:\Users\Guo Yu-Cheng\Documents\GitHub\ValidateGCVResults\CompareTxt(C#)\CompareTxt\bin\Debug\CompareTxt.exe.config
 C:\Users\Guo Yu-Cheng\Documents\GitHub\ValidateGCVResults\CompareTxt(C#)\CompareTxt\obj\Debug\CompareTxt.exe
 C:\Users\Guo Yu-Cheng\Documents\GitHub\ValidateGCVResults\CompareTxt(C#)\CompareTxt\obj\Debug\CompareTxt.pdb
+C:\GoogleDrive\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\Caltech101-C#_CompareTxt\CompareTxt\bin\Debug\CompareTxt.exe.config
+C:\GoogleDrive\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\Caltech101-C#_CompareTxt\CompareTxt\obj\Debug\CompareTxt.exe
+C:\GoogleDrive\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\Caltech101-C#_CompareTxt\CompareTxt\obj\Debug\CompareTxt.pdb
+C:\GoogleDrive\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\Caltech101-C#_CompareTxt\CompareTxt\bin\Debug\CompareTxt.exe
+C:\GoogleDrive\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\Caltech101-C#_CompareTxt\CompareTxt\bin\Debug\CompareTxt.pdb
+C:\GoogleDrive\PC-GoogleCloud\Document\正修老師\世興老師\GitHub\ValidateGCVResults\synonymWordCompared\Caltech101-C#_CompareTxt\CompareTxt\obj\Debug\CompareTxt.csprojResolveAssemblyReference.cache

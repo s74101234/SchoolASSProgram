@@ -23,7 +23,7 @@ namespace CompareTxt
         {
             Program CT = new Program();
             Console.WriteLine("程式已開始啟動，將會顯示進入以及離開訊息。");
-            CT.NoRepeatJpg();
+            //CT.NoRepeatJpg();
             CT.CompareTxt();
             CT.CompareTxt2();
             Console.Read();
@@ -35,12 +35,14 @@ namespace CompareTxt
             //路徑
             string TxtCaltechPath = @"../../../File/Caltech101Results.txt";
             string TxtComparejpgTotal1Path = @"../../../File/jpgFilterList.txt";
-            string NewTxtPath = @"../../../File/CompareTxt1.txt";
-            string NewTxtPath2 = @"../../../File/ComparejpgTotal1.txt";
+            string NewTxtPath = @"../../../File/CompareTxt1.csv";
+            string NewTxtPath2 = @"../../../File/ComparejpgTotal1.csv";
 
             //創建一個新的txt(true = 不覆蓋 && false = 覆蓋)
             StreamWriter sw = new StreamWriter(NewTxtPath, false);
             StreamWriter sw2 = new StreamWriter(NewTxtPath2, false);
+            sw.WriteLine("name1,jpgName,local,name2");
+            sw2.WriteLine("japName,total,success,unsuccess");
 
             //txt轉成陣列
             string TxtAll = File.ReadAllText(TxtCaltechPath);
@@ -92,11 +94,11 @@ namespace CompareTxt
             {
                 if (name1[i].Trim() == name2[i].Trim())
                 {
-                    sw.Write(name1[i] + ",");
-                    sw.Write(jpg[i] + ",");
-                    sw.Write(local[i] + ",");
-                    sw.Write(name2[i] + ",");
-                    sw.WriteLine("True");
+                    sw.Write(name1[i].Trim() + ",");
+                    sw.Write(jpg[i].Trim() + ",");
+                    sw.Write(local[i].Trim() + ",");
+                    sw.Write(name2[i].Trim() + ",");
+                    sw.Write("True");
                     sw.WriteLine();
 
                     //計算jpg成功次數
@@ -112,11 +114,11 @@ namespace CompareTxt
                 }
                 else
                 {
-                    sw.Write(name1[i] + ",");
-                    sw.Write(jpg[i] + ",");
-                    sw.Write(local[i] + ",");
-                    sw.Write(name2[i] + ",");
-                    sw.WriteLine("False");
+                    sw.Write(name1[i].Trim() + ",");
+                    sw.Write(jpg[i].Trim() + ",");
+                    sw.Write(local[i].Trim() + ",");
+                    sw.Write(name2[i].Trim() + ",");
+                    sw.Write("False");
                     sw.WriteLine();
 
                     //計算jpg失敗次數
@@ -137,29 +139,28 @@ namespace CompareTxt
             int jpgunsuccesstotal = 0;
             for (int i = 0; i < (SjpgTotal1.Length-1); i++)
             {
-                sw2.Write(SjpgTotal1[i] + ",");
-                sw2.Write("統計總數量：" + (jpgsuccess[i] + jpgunsuccess[i]) + ",");
-                sw2.Write("成功總數量：" + (jpgsuccess[i]) + ",");
-                sw2.WriteLine("失敗總數量：" + (jpgunsuccess[i]));
-                sw2.WriteLine();
+                sw2.Write(SjpgTotal1[i].Trim() + ",");
+                sw2.Write((jpgsuccess[i] + jpgunsuccess[i]) + ",");
+                sw2.Write((jpgsuccess[i]) + ",");
+                sw2.WriteLine((jpgunsuccess[i]));
                 jpgsuccesstotal += jpgsuccess[i];
                 jpgunsuccesstotal += jpgunsuccess[i];
             }
-            sw2.Write("統計總數量：" + (jpgsuccesstotal + jpgunsuccesstotal) + ",");
-            sw2.Write("成功總數量：" + (jpgsuccesstotal) + ",");
-            sw2.WriteLine("失敗總數量：" + (jpgunsuccesstotal));
+            sw2.Write((jpgsuccesstotal + jpgunsuccesstotal) + ",");
+            sw2.Write((jpgsuccesstotal) + ",");
+            sw2.Write((jpgunsuccesstotal));
 
             //將比對成功與失敗數量寫入sw
-            sw.WriteLine("比對總數：" + (success + unsuccess));
-            sw.WriteLine("比對成功：" + (success));
-            sw.WriteLine("比對失敗：" + (unsuccess));
+            sw.Write((success + unsuccess) + ",");
+            sw.Write((success) + ",");
+            sw.Write((unsuccess));
             
 
             sw.Close();
             sw2.Close();
-            Console.WriteLine("比對總數：" + (success + unsuccess));
-            Console.WriteLine("比對成功：" + (success));
-            Console.WriteLine("比對失敗：" + (unsuccess));
+            //Console.WriteLine("比對總數：" + (success + unsuccess));
+            //Console.WriteLine("比對成功：" + (success));
+            //Console.WriteLine("比對失敗：" + (unsuccess));
 
             Console.WriteLine("離開CompareTxt");
         }
@@ -239,13 +240,15 @@ namespace CompareTxt
 
             string TxtCaltechPath = @"../../../File/Caltech101Results.txt";
             string TxtComparejpgTotal1Path = @"../../../File/jpgFilterList.txt";
-            string NewTxtPath = @"../../../File/CompareTxt2.txt";
-            string NewTxtPath2 = @"../../../File/ComparejpgTotal2.txt";
+            string NewTxtPath = @"../../../File/CompareTxt2.csv";
+            string NewTxtPath2 = @"../../../File/ComparejpgTotal2.csv";
             string SynonymPath = @"../../../File/Synonym word";
 
             //創建一個新的txt(true = 不覆蓋 && false = 覆蓋)
             StreamWriter sw = new StreamWriter(NewTxtPath, false);
             StreamWriter sw2 = new StreamWriter(NewTxtPath2, false);
+            sw.WriteLine("name1,jpgName,local,name2");
+            sw2.WriteLine("japName,total,success,unsuccess");
 
             //txt轉成陣列
             string TxtAll = File.ReadAllText(TxtCaltechPath);
@@ -301,11 +304,11 @@ namespace CompareTxt
             {
                 if (name1[i].Trim() == name2[i].Trim())
                 {
-                    sw.Write(name1[i] + ",");
-                    sw.Write(jpg[i] + ",");
-                    sw.Write(local[i] + ",");
-                    sw.Write(name2[i] + ",");
-                    sw.WriteLine("True");
+                    sw.Write(name1[i].Trim() + ",");
+                    sw.Write(jpg[i].Trim() + ",");
+                    sw.Write(local[i].Trim() + ",");
+                    sw.Write(name2[i].Trim() + ",");
+                    sw.Write("True");
                     sw.WriteLine();
 
                     //計算jpg成功次數
@@ -334,11 +337,11 @@ namespace CompareTxt
                             {
                                 if (name2[i].Trim() == SSynonymWordTxt[SSWTcount].Trim())
                                 {
-                                    sw.Write(name1[i] + ",");
-                                    sw.Write(jpg[i] + ",");
-                                    sw.Write(local[i] + ",");
-                                    sw.Write(name2[i] + ",");
-                                    sw.WriteLine("True");
+                                    sw.Write(name1[i].Trim() + ",");
+                                    sw.Write(jpg[i].Trim() + ",");
+                                    sw.Write(local[i].Trim() + ",");
+                                    sw.Write(name2[i].Trim() + ",");
+                                    sw.Write("True");
                                     sw.WriteLine();
 
                                     //計算jpg成功次數
@@ -356,11 +359,11 @@ namespace CompareTxt
                             }
                             if (insuccess == false)
                             {
-                                sw.Write(name1[i] + ",");
-                                sw.Write(jpg[i] + ",");
-                                sw.Write(local[i] + ",");
-                                sw.Write(name2[i] + ",");
-                                sw.WriteLine("False");
+                                sw.Write(name1[i].Trim() + ",");
+                                sw.Write(jpg[i].Trim() + ",");
+                                sw.Write(local[i].Trim() + ",");
+                                sw.Write(name2[i].Trim() + ",");
+                                sw.Write("False");
                                 sw.WriteLine();
 
                                 //計算jpg失敗次數
@@ -384,29 +387,28 @@ namespace CompareTxt
             int jpgunsuccesstotal = 0;
             for (int i = 0; i < (SjpgTotal1.Length - 1); i++)
             {
-                sw2.Write(SjpgTotal1[i] + ",");
-                sw2.Write("統計總數量：" + (jpgsuccess[i] + jpgunsuccess[i]) + ",");
-                sw2.Write("成功總數量：" + (jpgsuccess[i]) + ",");
-                sw2.WriteLine("失敗總數量：" + (jpgunsuccess[i]));
-                sw2.WriteLine();
+                sw2.Write(SjpgTotal1[i].Trim() + ",");
+                sw2.Write((jpgsuccess[i] + jpgunsuccess[i]) + ",");
+                sw2.Write((jpgsuccess[i]) + ",");
+                sw2.WriteLine((jpgunsuccess[i]));
                 jpgsuccesstotal += jpgsuccess[i];
                 jpgunsuccesstotal += jpgunsuccess[i];
             }
-            sw2.Write("統計總數量：" + (jpgsuccesstotal + jpgunsuccesstotal) + ",");
-            sw2.Write("成功總數量：" + (jpgsuccesstotal) + ",");
-            sw2.WriteLine("失敗總數量：" + (jpgunsuccesstotal));
+            sw2.Write((jpgsuccesstotal + jpgunsuccesstotal) + ",");
+            sw2.Write((jpgsuccesstotal) + ",");
+            sw2.Write((jpgunsuccesstotal));
 
             //將比對成功與失敗數量寫入sw
-            sw.WriteLine("比對總數：" + (success + unsuccess));
-            sw.WriteLine("比對成功：" + (success));
-            sw.WriteLine("比對失敗：" + (unsuccess));
+            sw.Write((success + unsuccess) + ",");
+            sw.Write((success) + ",");
+            sw.Write((unsuccess));
 
 
             sw.Close();
             sw2.Close();
-            Console.WriteLine("比對總數：" + (success + unsuccess));
-            Console.WriteLine("比對成功：" + (success));
-            Console.WriteLine("比對失敗：" + (unsuccess));
+            //Console.WriteLine("比對總數：" + (success + unsuccess));
+            //Console.WriteLine("比對成功：" + (success));
+            //Console.WriteLine("比對失敗：" + (unsuccess));
 
             Console.WriteLine("離開CompareTxt2");
             
